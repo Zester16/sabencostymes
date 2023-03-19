@@ -13,7 +13,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.example.sabencostimes.domain.NYTNewsDataDomain
+import com.example.sabencostimes.navigation.NavGraph
 import com.example.sabencostimes.view.NewsListColumn
 import com.example.sabencostimes.viewmodel.MainDashViewModel
 import com.example.sabencostimes.ui.theme.SabencosTimes
@@ -27,8 +29,14 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
+
                 ) {
-                    Greeting("Business")
+                    val navController = rememberNavController()
+                    Column() {
+                        Greeting("Business")
+                        NavGraph(navController = navController)
+                    }
+
 
                 }
             }
@@ -39,12 +47,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String) {
 
-    val viewmodel = MainDashViewModel()
-    val newsList by viewmodel.newsList.observeAsState(emptyList<NYTNewsDataDomain>())
-    Column(){
-        Text(text = "Hello $name!")
-        NewsListColumn(newsList = newsList)
-    }
+
 
 
 

@@ -3,6 +3,8 @@ package com.example.sabencostimes.view
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,28 +17,10 @@ import com.example.sabencostimes.domain.NYTNewsDataDomain
 
 @Composable
 fun NewsListColumn(newsList:List<NYTNewsDataDomain>){
-    LazyColumn{
-        items(items = newsList){
-            Row(
-                horizontalArrangement =Arrangement.Center ,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-
-
-
-            ) {
-//                Column() {
-            AsyncImage(model = it.imageURL, contentDescription = it.description, modifier = Modifier.width(48.dp)
-            )
-                    Text(text = (it.title.toString()), fontSize = 20.sp, )
-
-                }
-
-
-            //}
-            }
+    LazyColumn() {
+        items(items = newsList) {
+            NewsCardView(nytNews = it)
         }
-
     }
+}
 

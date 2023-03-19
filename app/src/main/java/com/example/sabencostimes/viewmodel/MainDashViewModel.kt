@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sabencostimes.domain.NYTNewsDataDomain
 import com.example.sabencostimes.internet.Connect
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainDashViewModel:ViewModel() {
 
@@ -15,17 +17,23 @@ class MainDashViewModel:ViewModel() {
     val newsList:LiveData<List<NYTNewsDataDomain>>
     get() = _newsList
 
+
+
     init {
-        viewModelScope.launch {
-            val connect = Connect()
-            //try {
+        viewModelScope.launch(Dispatchers.IO) {
+             val connect = Connect()
+//                val data = connect.getData("https://rss.nytimes.com/services/xml/rss/nyt/Business.xml")
+//                val channel = connect.parseXML(data)
+//                _newsList.postValue(channel)
+//            }
+            try {
                 val data = connect.getData("https://rss.nytimes.com/services/xml/rss/nyt/Business.xml")
                 val channel = connect.parseXML(data)
                 _newsList.postValue(channel)
-            //}
-            //catch (exception:Exception){
-                //Log.v("nytNews",exception.toString())
-            //}
+            }
+            catch (exception:Exception){
+                Log.v("nytNews",exception.toString())
+            }
 
         }
     }
