@@ -11,15 +11,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.example.sabencostimes.domain.NYTNewsDataDomain
 
 @Composable
-fun NewsListColumn(newsList:List<NYTNewsDataDomain>){
+fun NewsListColumn(navHost:NavHostController,newsList:List<NYTNewsDataDomain>){
     LazyColumn() {
         items(items = newsList) {
-            NewsCardView(nytNews = it)
+            NewsCardView(navHost,nytNews = it)
         }
     }
 }

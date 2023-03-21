@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id("kotlin-parcelize")
 }
 
 android {
@@ -68,4 +69,7 @@ dependencies {
 
     //for getting image from internet
     implementation "io.coil-kt:coil-compose:2.2.2"
+
+    //for converting json
+    implementation "com.squareup.moshi:moshi-kotlin:1.9.3"
 }

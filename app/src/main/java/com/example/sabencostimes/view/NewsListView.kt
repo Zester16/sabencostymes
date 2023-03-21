@@ -16,7 +16,7 @@ fun NewsListView(navHostController: NavHostController) {
     val newsList by viewmodel.newsList.observeAsState(emptyList<NYTNewsDataDomain>())
     Column(){
         Text(text = "Business News")
-        NewsListColumn(newsList = newsList)
+        NewsListColumn(navHost = navHostController, newsList = newsList)
     }
 
 }
