@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import com.example.sabencostimes.parceable.NYTNewsParceable
 import com.example.sabencostimes.view.NewsIndividualView
 import com.example.sabencostimes.view.NewsListView
+import com.example.sabencostimes.view.NewsWebView
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
@@ -18,10 +19,12 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 fun NavGraph(navController:NavHostController) {
     NavHost(navController = navController, startDestination = NavigationConstant.BUSINESS_NEWS)
     {
+        //shows all news
         composable(NavigationConstant.BUSINESS_NEWS){
             NewsListView(navHostController = navController)
             
         }
+        //show individual news
         composable(NavigationConstant.INDIVIDUAL_NEWS){backStackEntry->
             val newsJson =  backStackEntry.arguments?.getString("news")
             val moshi = Moshi.Builder()
@@ -32,8 +35,12 @@ fun NavGraph(navController:NavHostController) {
 
                 NewsIndividualView(news = news!!, navController = navController)
             }
-
-
+        composable(NavigationConstant.WEB_VIEW_PATH){ backStackEntry->
+            val urlLink = backStackEntry.arguments?.getString("webUrl")
+            if (urlLink != null) {
+                NewsWebView(navController = navController,newsUrl= urlLink)
+            }
+        }
     }
     
 

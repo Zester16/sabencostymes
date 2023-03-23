@@ -54,6 +54,12 @@ fun  NewsCardView(navHostController: NavHostController,nytNews:NYTNewsDataDomain
             }) {
                 Text("Read More")
             }
+            Button(onClick = {
+                navHostController.navigate(NavigationConstant.WEB_VIEW_PATH.replace("{webUrl}",nytNews.url.toString()))
+
+            }){
+                Text("web")
+            }
         }
             }
 
