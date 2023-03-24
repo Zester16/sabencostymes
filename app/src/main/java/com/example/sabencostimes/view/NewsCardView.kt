@@ -1,5 +1,7 @@
 package com.example.sabencostimes.view
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.sabencostimes.R
@@ -30,6 +34,7 @@ fun  NewsCardView(navHostController: NavHostController,nytNews:NYTNewsDataDomain
         val readIcon = painterResource(id = R.drawable.read)
         val shareIcon = painterResource(id = R.drawable.share
         )
+        val context = LocalContext.current
         Column(
             Modifier
                 .fillMaxWidth()
@@ -77,6 +82,15 @@ fun  NewsCardView(navHostController: NavHostController,nytNews:NYTNewsDataDomain
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
                 ){
                     Image(painter = (webIcon), contentDescription = "browser",Modifier.background(color = Color.White))
+                }
+                Button(onClick ={
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(nytNews.url))
+                    startActivity(context, intent, null)
+                } ,
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
+                ){
+                    Image(painter = (shareIcon), contentDescription = "browser",Modifier.background(color = Color.White))
+
                 }
             }
 
