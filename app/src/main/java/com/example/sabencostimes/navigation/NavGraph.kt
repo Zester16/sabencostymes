@@ -3,25 +3,32 @@ package com.example.sabencostimes.navigation
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.sabencostimes.domain.NYTNewsDataDomain
 import com.example.sabencostimes.parceable.NYTNewsParceable
 import com.example.sabencostimes.view.NewsIndividualView
 import com.example.sabencostimes.view.NewsListView
 import com.example.sabencostimes.view.NewsWebView
+import com.example.sabencostimes.viewmodel.MainDashViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun NavGraph(navController:NavHostController) {
+    val viewmodel = MainDashViewModel()
+    val newsList by viewmodel.newsList.observeAsState(emptyList<NYTNewsDataDomain>())
     NavHost(navController = navController, startDestination = NavigationConstant.BUSINESS_NEWS)
     {
         //shows all news
         composable(NavigationConstant.BUSINESS_NEWS){
-            NewsListView(navHostController = navController)
+
+            NewsListView(navHostController = navController,viewmodel)
             
         }
         //show individual news

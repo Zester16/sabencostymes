@@ -50,12 +50,19 @@ fun  NewsCardView(navHostController: NavHostController,nytNews:NYTNewsDataDomain
                     .build()
                 val jsonAdapter = moshi.adapter(NYTNewsParceable::class.java).lenient()
                 val newsJson = jsonAdapter.toJson(nytNews.toParceable())
-                navHostController.navigate(NavigationConstant.INDIVIDUAL_NEWS.replace("{news}",newsJson))
+                navHostController.navigate(NavigationConstant.INDIVIDUAL_NEWS.replace("{news}",newsJson)){
+                    //launchSingleTop = true
+                    //restoreState = true
+                }
             }) {
                 Text("Read More")
             }
             Button(onClick = {
-                navHostController.navigate(NavigationConstant.WEB_VIEW_PATH.replace("{webUrl}",nytNews.url.toString()))
+
+                navHostController.navigate(NavigationConstant.WEB_VIEW_PATH.replace("{webUrl}",nytNews.url.toString())){
+                    //launchSingleTop = true
+                    //restoreState = true
+                }
 
             }){
                 Text("web")

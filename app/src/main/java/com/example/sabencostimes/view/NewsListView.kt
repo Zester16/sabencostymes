@@ -10,9 +10,9 @@ import com.example.sabencostimes.domain.NYTNewsDataDomain
 import com.example.sabencostimes.viewmodel.MainDashViewModel
 
 @Composable
-fun NewsListView(navHostController: NavHostController) {
+fun NewsListView(navHostController: NavHostController, viewmodel: MainDashViewModel) {
 
-    val viewmodel = MainDashViewModel()
+    //val viewmodel = MainDashViewModel()
     val newsList by viewmodel.newsList.observeAsState(emptyList<NYTNewsDataDomain>())
     Column(){
         Text(text = "Business News")
