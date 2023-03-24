@@ -30,7 +30,8 @@ fun NewsIndividualView(navController:NavHostController,news:NYTNewsParceable) {
         news.let {
 
 
-            //AsyncImage(model = it.imageURL, contentDescription = it.description,)
+
+            AsyncImage(model = it.imageURL, contentDescription = it.description,)
             Text(it.title.toString(), fontSize = 32.sp)
             Text(it.description.toString(), fontSize = 24.sp)
         }
