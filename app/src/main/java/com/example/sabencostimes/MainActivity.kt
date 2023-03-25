@@ -16,8 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.sabencostimes.domain.NYTNewsDataDomain
 import com.example.sabencostimes.navigation.NavGraph
-import com.example.sabencostimes.view.NewsListColumn
-import com.example.sabencostimes.viewmodel.MainDashViewModel
+
 import com.example.sabencostimes.ui.theme.SabencosTimes
 
 class MainActivity : ComponentActivity() {

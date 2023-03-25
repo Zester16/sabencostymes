@@ -14,21 +14,21 @@ import com.example.sabencostimes.parceable.NYTNewsParceable
 import com.example.sabencostimes.view.NewsIndividualView
 import com.example.sabencostimes.view.NewsListView
 import com.example.sabencostimes.view.NewsWebView
-import com.example.sabencostimes.viewmodel.MainDashViewModel
+import com.example.sabencostimes.viewmodel.NewsDashViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun NavGraph(navController:NavHostController) {
-    val viewmodel = MainDashViewModel()
-    val newsList by viewmodel.newsList.observeAsState(emptyList<NYTNewsDataDomain>())
+    //val viewmodel = MainDashViewModel()
+    //val newsList by viewmodel.newsList.observeAsState(emptyList<NYTNewsDataDomain>())
     NavHost(navController = navController, startDestination = NavigationConstant.BUSINESS_NEWS)
     {
         //shows all news
         composable(NavigationConstant.BUSINESS_NEWS){
 
-            NewsListView(navHostController = navController,viewmodel)
+            NewsListView(navHostController = navController,1)
             
         }
         //show individual news
