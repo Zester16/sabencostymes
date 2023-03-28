@@ -38,6 +38,7 @@ class NewsDashViewModel(val newsType:Int):ViewModel() {
             try {
                 val newsURL = type.let {
                     if(it == 0) return@let NYTimesURL.BUSINESS_NEWS
+                    else if(it == 2) return@let NYTimesURL.ASIA_PACIFIC
                     else return@let NYTimesURL.MIDDLE_EAST_NEWS
                 }
                 val data = connect.getData(newsURL)

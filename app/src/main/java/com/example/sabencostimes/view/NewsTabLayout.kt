@@ -14,7 +14,7 @@ import com.example.sabencostimes.viewmodel.NewsDashViewModel
 
 @Composable
 fun NewsTabLayout(navHostController: NavHostController,viewmodel: NewsDashViewModel =  viewModel(factory = NewsDashModelFactory(1))) {
-    val tabs = listOf("Business", "Middle East",)
+    val tabs = listOf("Business", "Middle East","APAC")
     var tabIndex by remember { mutableStateOf(0) }
 
         Column(modifier = Modifier.fillMaxWidth()) {
