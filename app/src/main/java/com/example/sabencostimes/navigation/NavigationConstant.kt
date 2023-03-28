@@ -8,5 +8,5 @@ object NavigationConstant {
     const val INDIVIDUAL_NEWS = "individual_news?news={news}"
     const val BUSINESS_NEWS = "business_news"
     const val WEB_VIEW_PATH="webview?webUrl={webUrl}"
-
+    const val TAB_VIEW = "tab_view"
 }

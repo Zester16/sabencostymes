@@ -13,6 +13,7 @@ import com.example.sabencostimes.domain.NYTNewsDataDomain
 import com.example.sabencostimes.parceable.NYTNewsParceable
 import com.example.sabencostimes.view.NewsIndividualView
 import com.example.sabencostimes.view.NewsListView
+import com.example.sabencostimes.view.NewsTabLayout
 import com.example.sabencostimes.view.NewsWebView
 import com.example.sabencostimes.viewmodel.NewsDashViewModel
 import com.squareup.moshi.Moshi
@@ -23,8 +24,12 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 fun NavGraph(navController:NavHostController) {
     //val viewmodel = MainDashViewModel()
     //val newsList by viewmodel.newsList.observeAsState(emptyList<NYTNewsDataDomain>())
-    NavHost(navController = navController, startDestination = NavigationConstant.BUSINESS_NEWS)
+    NavHost(navController = navController, startDestination = NavigationConstant.TAB_VIEW)
     {
+
+        composable(NavigationConstant.TAB_VIEW){
+            NewsTabLayout(navHostController = navController)
+        }
         //shows all news
         composable(NavigationConstant.BUSINESS_NEWS){
 
