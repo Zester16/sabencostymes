@@ -15,17 +15,22 @@ class NewsDashViewModel(val newsType:Int):ViewModel() {
     val newsList:LiveData<List<NYTNewsDataDomain>>
     get() = _newsList
 
+    private val _tabIndex = MutableLiveData<Int>()
+    val tabIndex:LiveData<Int>
+    get() = _tabIndex
 
 
     init {
-        getNews()
+        initNews()
 }
 
-    fun getNews(){
+    fun initNews(){
+        _tabIndex.value = 0
         getNewsFromNewsType(0)
     }
 
     fun setNewsById(type:Int){
+        _tabIndex.value = type
         getNewsFromNewsType(type)
     }
     private fun getNewsFromNewsType(type:Int){
