@@ -20,18 +20,26 @@ class NewsDashViewModel(val newsType:Int):ViewModel() {
     get() = _tabIndex
 
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading:LiveData<Boolean>
+    get() = _isLoading
     init {
         initNews()
 }
 
     fun initNews(){
+        setIsLoadingTrue()
         _tabIndex.value = 0
         getNewsFromNewsType(0)
+
     }
 
     fun setNewsById(type:Int){
+        setIsLoadingTrue()
         _tabIndex.value = type
         getNewsFromNewsType(type)
+
+
     }
     private fun getNewsFromNewsType(type:Int){
         viewModelScope.launch(Dispatchers.IO) {
@@ -41,6 +49,7 @@ class NewsDashViewModel(val newsType:Int):ViewModel() {
 //                _newsList.postValue(channel)
 //            }
             try {
+                _isLoading.postValue(true)
                 val newsURL = type.let {
                     if(it == 0) return@let NYTimesURL.BUSINESS_NEWS
                     else if(it == 2) return@let NYTimesURL.ASIA_PACIFIC
@@ -49,12 +58,23 @@ class NewsDashViewModel(val newsType:Int):ViewModel() {
                 val data = connect.getData(newsURL)
                 val channel = connect.parseXML(data)
                 _newsList.postValue(channel)
+                _isLoading.postValue(false)
+
             }
             catch (exception:Exception){
                 Log.v("nytNews",exception.toString())
+                _isLoading.postValue(false)
             }
 
         }
+
+    }
+
+    private fun setIsLoadingTrue(){
+        _isLoading.value = true
+    }
+    private fun setIsLoadingFalse(){
+        _isLoading.value = false
     }
 }
 

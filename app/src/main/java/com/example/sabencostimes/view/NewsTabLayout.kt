@@ -17,24 +17,26 @@ import com.example.sabencostimes.viewmodel.NewsDashViewModel
 fun NewsTabLayout(navHostController: NavHostController,viewmodel: NewsDashViewModel =  viewModel(factory = NewsDashModelFactory(1))) {
     val tabs = listOf("Business", "Middle East","APAC")
     //var tabIndex by remember { mutableStateOf(0) }
-     val tabIndex by viewmodel.tabIndex.observeAsState(0)
+    val tabIndex by viewmodel.tabIndex.observeAsState(0)
+    val isLoading by viewmodel.isLoading.observeAsState(true)
+    if(isLoading){
+        CircleProgressIndicator()
+    }
+    else {
         Column(modifier = Modifier.fillMaxWidth()) {
             TabRow(selectedTabIndex = tabIndex) {
                 tabs.forEachIndexed { index, title ->
                     Tab(text = { Text(title) },
                         selected = tabIndex == index,
-                        onClick = {viewmodel.setNewsById(index) }
+                        onClick = { viewmodel.setNewsById(index) }
                     )
                 }
             }
             //viewmodel.setNewsById(tabIndex)
             NewsListView(navHostController = navHostController, type = 0)
 
-
-
-
-
         }
+    }
 }
 
 
