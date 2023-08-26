@@ -1,16 +1,17 @@
 package com.example.sabencostimes.navigation
 
 import android.annotation.SuppressLint
-import android.os.Bundle
+
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
+
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
+
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.sabencostimes.domain.NYTNewsDataDomain
+
 import com.example.sabencostimes.parceable.NYTNewsParceable
+
+import com.example.sabencostimes.view.DashboardLayout
 import com.example.sabencostimes.view.NewsIndividualView
 import com.example.sabencostimes.view.NewsListView
 import com.example.sabencostimes.view.NewsTabLayout
@@ -24,9 +25,12 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 fun NavGraph(navController:NavHostController) {
     //val viewmodel = MainDashViewModel()
     //val newsList by viewmodel.newsList.observeAsState(emptyList<NYTNewsDataDomain>())
-    NavHost(navController = navController, startDestination = NavigationConstant.TAB_VIEW)
+    NavHost(navController = navController, startDestination = NavigationConstant.DASHBOARD)
     {
 
+        composable(NavigationConstant.DASHBOARD){
+            DashboardLayout()
+        }
         composable(NavigationConstant.TAB_VIEW){
             NewsTabLayout(navHostController = navController)
         }
