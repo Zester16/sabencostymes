@@ -16,6 +16,7 @@ import com.example.sabencostimes.view.NewsIndividualView
 import com.example.sabencostimes.view.NewsListView
 import com.example.sabencostimes.view.NewsTabLayout
 import com.example.sabencostimes.view.NewsWebView
+import com.example.sabencostimes.view.SettingsLayout
 import com.example.sabencostimes.viewmodel.NewsDashViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -30,6 +31,9 @@ fun NavGraph(navController:NavHostController) {
 
         composable(NavigationConstant.DASHBOARD){
             DashboardLayout()
+        }
+        composable(NavigationConstant.SETTINGS){
+            SettingsLayout()
         }
         composable(NavigationConstant.TAB_VIEW){
             NewsTabLayout(navHostController = navController)
