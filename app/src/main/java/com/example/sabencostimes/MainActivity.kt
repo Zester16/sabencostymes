@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                     Column() {
                         //Greeting("Business")
                         //Row(){
-                        val items = listOf(BottomNavigationItem.Dash,BottomNavigationItem.News)
+                        val items = listOf(BottomNavigationItem.Dash,BottomNavigationItem.News,BottomNavigationItem.Settings)
                         BottomNavigation (modifier = Modifier.align(alignment = Alignment.Start)){
                             items.forEach{item->
                                       BottomNavigationItem(

@@ -9,4 +9,5 @@ object NavigationConstant {
     const val BUSINESS_NEWS = "business_news"
     const val WEB_VIEW_PATH="webview?webUrl={webUrl}"
     const val TAB_VIEW = "tab_view"
+    const val SETTINGS="settings"
 }
