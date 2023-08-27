@@ -1,4 +1,4 @@
-package com.example.sabencostimes.internet
+package com.example.sabencostimes.network
 
 import android.util.Log
 import com.example.sabencostimes.domain.NYTNewsDataDomain

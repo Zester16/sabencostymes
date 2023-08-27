@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.sabencostimes.domain.NYTNewsDataDomain
-import com.example.sabencostimes.internet.Connect
-import com.example.sabencostimes.internet.NYTimesURL
+import com.example.sabencostimes.network.Connect
+import com.example.sabencostimes.network.NYTimesURL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
