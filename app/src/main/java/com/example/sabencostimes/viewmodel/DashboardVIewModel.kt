@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sabencostimes.domain.NYTNewsDataDomain
 import com.example.sabencostimes.network.Connect
+import com.example.sabencostimes.network.KotlinJsonConnect
 import com.example.sabencostimes.repository.NYTNewsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +30,7 @@ class DashboardViewModel():ViewModel() {
     init{
         nytNewsRepository = NYTNewsRepository(Connect())
     getNews()
+        getDashData()
     }
 
     private  fun getNews(){
@@ -37,5 +39,11 @@ class DashboardViewModel():ViewModel() {
             Log.v("Dash", _mainNewsList.value.toString())
         }
 
+    }
+    private fun getDashData(){
+        viewmodelScope.launch{
+            val input = Connect().getData("https://www.nytimes.com/api/market")
+            KotlinJsonConnect().parseJSon(input)
+        }
     }
 }
