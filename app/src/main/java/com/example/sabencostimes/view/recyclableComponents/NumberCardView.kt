@@ -24,7 +24,6 @@ import kotlin.math.round
 fun StockCardView(threeCardDomain:ThreeCardDomain,primaryModifier:Modifier){
     val interFont= FontFamily(
         Font(R.font.inter_500),
-
     )
     Card(modifier = Modifier.padding(16.dp)
         .width(192.dp)

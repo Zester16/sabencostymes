@@ -13,6 +13,9 @@ import com.example.sabencostimes.R
 val Oswald = FontFamily(
     Font(R.font.oswald_medium)
 )
+val InterFont= FontFamily(
+    Font(R.font.young_serif),
+)
 val Typography = Typography(
     h1= TextStyle(
         fontFamily = Oswald,

@@ -13,9 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import com.example.sabencostimes.R
 import com.example.sabencostimes.domain.NYTMarketApiDomain
 import com.example.sabencostimes.domain.ThreeCardDomain
+import com.example.sabencostimes.ui.theme.InterFont
 import com.example.sabencostimes.view.recyclableComponents.StockCardView
 import com.example.sabencostimes.viewmodel.DashboardViewModel
 
@@ -24,7 +29,8 @@ fun DashboardLayout( viewmodel:DashboardViewModel=DashboardViewModel()){
 
     val stockMarketList by viewmodel.nytMarketApi.observeAsState( emptyList<NYTMarketApiDomain>())
     Column(modifier=Modifier.padding(16.dp)){
-        Text(text = "This is Dashboard")
+
+        Text(text = "STOCK MARKET", fontFamily = InterFont)
         LazyRow(modifier = Modifier.fillMaxWidth(),
             state = rememberLazyListState()){
             items(items = stockMarketList) {it->
