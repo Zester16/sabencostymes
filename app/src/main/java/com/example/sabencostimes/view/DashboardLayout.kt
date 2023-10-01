@@ -1,6 +1,7 @@
 package com.example.sabencostimes.view
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,14 +21,15 @@ import com.example.sabencostimes.viewmodel.DashboardViewModel
 
 @Composable
 fun DashboardLayout( viewmodel:DashboardViewModel=DashboardViewModel()){
- val stockMarketList by viewmodel.nytMarketApi.observeAsState( emptyList<NYTMarketApiDomain>())
+
+    val stockMarketList by viewmodel.nytMarketApi.observeAsState( emptyList<NYTMarketApiDomain>())
     Column(modifier=Modifier.padding(16.dp)){
         Text(text = "This is Dashboard")
         LazyRow(modifier = Modifier.fillMaxWidth(),
             state = rememberLazyListState()){
             items(items = stockMarketList) {it->
                 val threeCardDomain = ThreeCardDomain(primaryData = it.points.toString(), secondaryData = it.percentageChange.toString(), description = it.name)
-                StockCardView(threeCardDomain = threeCardDomain, primaryModifier =Modifier.height(32.dp) )
+                StockCardView(threeCardDomain = threeCardDomain, primaryModifier=Modifier )
             }
 
 
