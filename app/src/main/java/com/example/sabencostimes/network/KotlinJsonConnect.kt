@@ -20,7 +20,7 @@ class KotlinJsonConnect {
                 val data = datas.get(i)
                 val dataObject =datas.getJSONObject(i)
 
-                val newData = NYTMarketApiDomain(name=dataObject.getString("identifier"), points = dataObject.getLong("last"), percentageChange =dataObject.getLong("changePercent"), timestamp = dataObject.getString("lastTimestamp") )
+                val newData = NYTMarketApiDomain(name=dataObject.getString("identifier"), points = dataObject.getDouble("last"), percentageChange =dataObject.getDouble("changePercent"), timestamp = dataObject.getString("lastTimestamp") )
                 dataArray.add(newData)
 
                 i++

@@ -1,5 +1,6 @@
 package com.example.sabencostimes.view
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,6 +35,7 @@ fun DashboardLayout( viewmodel:DashboardViewModel=DashboardViewModel()){
         LazyRow(modifier = Modifier.fillMaxWidth(),
             state = rememberLazyListState()){
             items(items = stockMarketList) {it->
+                Log.v("percemt",it.percentageChange.toString())
                 val threeCardDomain = ThreeCardDomain(primaryData = it.points.toString(), secondaryData = it.percentageChange.toString(), description = it.name)
                 StockCardView(threeCardDomain = threeCardDomain, primaryModifier=Modifier )
             }
