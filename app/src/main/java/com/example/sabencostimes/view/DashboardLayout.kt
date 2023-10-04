@@ -22,6 +22,7 @@ import com.example.sabencostimes.R
 import com.example.sabencostimes.domain.NYTMarketApiDomain
 import com.example.sabencostimes.domain.ThreeCardDomain
 import com.example.sabencostimes.ui.theme.InterFont
+import com.example.sabencostimes.utils.convertDoubleToStringFormat
 import com.example.sabencostimes.view.recyclableComponents.StockCardView
 import com.example.sabencostimes.viewmodel.DashboardViewModel
 
@@ -36,7 +37,7 @@ fun DashboardLayout( viewmodel:DashboardViewModel=DashboardViewModel()){
             state = rememberLazyListState()){
             items(items = stockMarketList) {it->
                 Log.v("percemt",it.percentageChange.toString())
-                val threeCardDomain = ThreeCardDomain(primaryData = it.points.toString(), secondaryData = it.percentageChange.toString(), description = it.name)
+                val threeCardDomain = ThreeCardDomain(primaryData = convertDoubleToStringFormat(it.points), secondaryData = convertDoubleToStringFormat(it.percentageChange)+"%" , description = it.name)
                 StockCardView(threeCardDomain = threeCardDomain, primaryModifier=Modifier )
             }
 
