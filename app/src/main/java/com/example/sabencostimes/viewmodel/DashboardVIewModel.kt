@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 private lateinit var nytNewsRepository: NYTNewsRepository
 class DashboardViewModel():ViewModel() {
@@ -36,7 +37,7 @@ class DashboardViewModel():ViewModel() {
 
     init{
         nytNewsRepository = NYTNewsRepository(Connect())
-    getNews()
+   // getNews()
         getDashData()
     }
 
@@ -47,10 +48,20 @@ class DashboardViewModel():ViewModel() {
         }
 
     }
-    private fun getDashData(){
-        viewmodelScope.launch{
-            val input = Connect().getData("https://www.nytimes.com/api/market")
-            _nytMarketApi.value = KotlinJsonConnect().parseJSon(input)
+    private fun getDashData() {
+            val connect = Connect()
+            viewmodelScope.launch {
+                try {
+                val input =  connect.getData("https://www.nytimes.com/api/market")
+                _nytMarketApi.postValue(KotlinJsonConnect().parseJSon(input))
+            }
+                catch (exception:Exception){
+                    Log.v("Dashboard Exception", exception.toString())
+                }
+                catch (error:Error){
+                    Log.v("Dashboard Error", error.toString())
+                }
         }
+
     }
 }
