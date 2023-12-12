@@ -1,4 +1,4 @@
-package com.example.sabencostimes.view
+package com.example.sabencostimes.appTab
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +10,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.sabencostimes.view.CircleProgressIndicator
+import com.example.sabencostimes.view.NewsListView
 import com.example.sabencostimes.viewmodel.NewsDashModelFactory
 import com.example.sabencostimes.viewmodel.NewsDashViewModel
 

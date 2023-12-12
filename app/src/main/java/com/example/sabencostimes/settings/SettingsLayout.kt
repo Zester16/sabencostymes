@@ -1,4 +1,4 @@
-package com.example.sabencostimes.view
+package com.example.sabencostimes.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
