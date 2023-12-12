@@ -1,4 +1,4 @@
-package com.example.sabencostimes.viewmodel
+package com.example.sabencostimes.dashboard
 
 import android.util.Log
 import androidx.lifecycle.LiveData

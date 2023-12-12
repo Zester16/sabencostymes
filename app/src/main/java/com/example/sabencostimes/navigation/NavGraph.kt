@@ -11,13 +11,12 @@ import androidx.navigation.compose.composable
 
 import com.example.sabencostimes.parceable.NYTNewsParceable
 
-import com.example.sabencostimes.view.DashboardLayout
+import com.example.sabencostimes.dashboard.DashboardLayout
 import com.example.sabencostimes.view.NewsIndividualView
 import com.example.sabencostimes.view.NewsListView
 import com.example.sabencostimes.view.NewsTabLayout
 import com.example.sabencostimes.view.NewsWebView
 import com.example.sabencostimes.view.SettingsLayout
-import com.example.sabencostimes.viewmodel.NewsDashViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
