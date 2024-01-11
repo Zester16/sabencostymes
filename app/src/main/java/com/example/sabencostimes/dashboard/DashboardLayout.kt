@@ -12,7 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ComponentActivity
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sabencostimes.domain.NYTMarketApiDomain
 import com.example.sabencostimes.domain.ThreeCardDomain
 import com.example.sabencostimes.ui.theme.InterFont
@@ -21,7 +24,7 @@ import com.example.sabencostimes.view.recyclableComponents.StockCardView
 import com.example.sabencostimes.dashboard.DashboardViewModel
 
 @Composable
-fun DashboardLayout( viewmodel: DashboardViewModel = DashboardViewModel()){
+fun DashboardLayout( viewmodel: DashboardViewModel = viewModel(factory = null)){
 
     val stockMarketList by viewmodel.nytMarketApi.observeAsState( emptyList<NYTMarketApiDomain>())
     Column(modifier=Modifier.padding(16.dp)){
