@@ -17,6 +17,7 @@ fun NewsWebView( navController:NavHostController,newsUrl:String) {
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             webViewClient = WebViewClient()
+            this.settings.javaScriptEnabled = true
             loadUrl(newsUrl)
         }
     }, update = {
