@@ -1,4 +1,4 @@
-package com.example.sabencostimes.view
+package com.example.sabencostimes.webview
 
 import android.view.ViewGroup
 import android.webkit.WebView
