@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sabencostimes.domain.NYTMarketApiDomain
 import com.example.sabencostimes.domain.NYTNewsDataDomain
-import com.example.sabencostimes.network.Connect
-import com.example.sabencostimes.network.KotlinJsonConnect
+import com.example.sabencostimes.network.xml.parser.Connect
+import com.example.sabencostimes.network.xml.parser.KotlinJsonConnect
 import com.example.sabencostimes.repository.NYTNewsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.example.sabencostimes.network
+package com.example.sabencostimes.network.xml.parser
 
 import android.util.Log
 import com.example.sabencostimes.domain.NYTMarketApiDomain

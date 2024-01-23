@@ -1,4 +1,4 @@
-package com.example.sabencostimes.network
+package com.example.sabencostimes.network.xml.parser
 
 object NYTimesURL {
 
