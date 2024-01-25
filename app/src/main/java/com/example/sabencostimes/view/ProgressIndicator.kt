@@ -1,5 +1,6 @@
 package com.example.sabencostimes.view
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -14,7 +15,9 @@ fun CircleProgressIndicator(){
     CircularProgressIndicator(
         // below line is use to add padding
         // to our progress bar.
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
 
         // below line is use to add color
         // to our progress bar.

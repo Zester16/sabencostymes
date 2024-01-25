@@ -16,17 +16,20 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ComponentActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.sabencostimes.domain.NYTMarketApiDomain
 import com.example.sabencostimes.domain.ThreeCardDomain
 import com.example.sabencostimes.ui.theme.InterFont
 import com.example.sabencostimes.utils.convertDoubleToStringFormat
 import com.example.sabencostimes.view.recyclableComponents.StockCardView
 import com.example.sabencostimes.dashboard.DashboardViewModel
+import com.example.sabencostimes.view.NewsListColumn
 
 @Composable
-fun DashboardLayout( viewmodel: DashboardViewModel = viewModel(factory = null)){
+fun DashboardLayout( navHostController: NavHostController,viewmodel: DashboardViewModel = viewModel(factory = null)){
 
     val stockMarketList by viewmodel.nytMarketApi.observeAsState( emptyList<NYTMarketApiDomain>())
+    val newsList by viewmodel.newsList.observeAsState(initial = emptyList())
     Column(modifier=Modifier.padding(16.dp)){
 
         Text(text = "STOCK MARKET", fontFamily = InterFont)
@@ -38,8 +41,12 @@ fun DashboardLayout( viewmodel: DashboardViewModel = viewModel(factory = null)){
                 StockCardView(threeCardDomain = threeCardDomain, primaryModifier=Modifier )
             }
 
-
         }
+        if(newsList.isNotEmpty()){
+            Text(text = "BREAKING NEWS", fontFamily = InterFont)
+            NewsListColumn(navHost = navHostController, newsList = newsList)
+        }
+
     }
 
 }

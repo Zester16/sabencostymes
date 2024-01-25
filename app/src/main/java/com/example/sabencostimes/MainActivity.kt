@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                     Column() {
                         //Greeting("Business")
                         //Row(){
-                        val items = listOf(BottomNavigationItem.Dash,BottomNavigationItem.News,BottomNavigationItem.Settings)
+                        val items = listOf(BottomNavigationItem.Dash,BottomNavigationItem.News,BottomNavigationItem.Newsletter,BottomNavigationItem.Settings)
                         Log.v("url", BuildConfig.TIVV_URL.toString())
                         BottomNavigation (modifier = Modifier.align(alignment = Alignment.Start)){
                             items.forEach{item->

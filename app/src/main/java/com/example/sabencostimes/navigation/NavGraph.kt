@@ -29,7 +29,7 @@ fun NavGraph(navController:NavHostController) {
     {
 
         composable(NavigationConstant.DASHBOARD){
-            DashboardLayout()
+            DashboardLayout(navController)
         }
         composable(NavigationConstant.SETTINGS){
             SettingsLayout()
@@ -38,7 +38,7 @@ fun NavGraph(navController:NavHostController) {
             NewsTabLayout(navHostController = navController)
         }
         //shows all news
-        composable(NavigationConstant.BUSINESS_NEWS){
+        composable(NavigationConstant.BUSINESS_NEWS){backStackEntry->
 
             NewsListView(navHostController = navController,1)
             

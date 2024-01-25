@@ -19,8 +19,8 @@ import java.lang.Exception
 private lateinit var nytNewsRepository: NYTNewsRepository
 class DashboardViewModel():ViewModel() {
 
-    private val _mainNewsList= MutableLiveData<List<NYTNewsDataDomain?>>()
-    val newsList:LiveData<List<NYTNewsDataDomain?>>
+    private val _mainNewsList= MutableLiveData<List<NYTNewsDataDomain>>()
+    val newsList:LiveData<List<NYTNewsDataDomain>>
         get() = _mainNewsList
 
     private val _nytMarketApi = MutableLiveData<List<NYTMarketApiDomain>>()
@@ -37,7 +37,7 @@ class DashboardViewModel():ViewModel() {
 
     init{
         nytNewsRepository = NYTNewsRepository(Connect())
-   // getNews()
+         getNews()
         getDashData()
     }
 
