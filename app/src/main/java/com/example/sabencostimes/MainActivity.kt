@@ -1,6 +1,7 @@
 package com.example.sabencostimes
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -51,6 +52,7 @@ class MainActivity : ComponentActivity() {
                         //Greeting("Business")
                         //Row(){
                         val items = listOf(BottomNavigationItem.Dash,BottomNavigationItem.News,BottomNavigationItem.Settings)
+                        Log.v("url", BuildConfig.TIVV_URL.toString())
                         BottomNavigation (modifier = Modifier.align(alignment = Alignment.Start)){
                             items.forEach{item->
                                       BottomNavigationItem(
