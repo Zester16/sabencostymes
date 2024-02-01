@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.sabencostimes.domain.NYTNewsDataDomain
 import com.example.sabencostimes.network.xml.parser.Connect
+import com.example.sabencostimes.network.xml.parser.KotlinXmlConnect
 import com.example.sabencostimes.network.xml.parser.NYTimesURL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,6 +45,7 @@ class NewsDashViewModel(val newsType:Int):ViewModel() {
     private fun getNewsFromNewsType(type:Int){
         viewModelScope.launch(Dispatchers.IO) {
             val connect = Connect()
+            val kotlinXmlConnect = KotlinXmlConnect()
 //                val data = connect.getData("https://rss.nytimes.com/services/xml/rss/nyt/Business.xml")
 //                val channel = connect.parseXML(data)
 //                _newsList.postValue(channel)
@@ -56,7 +58,7 @@ class NewsDashViewModel(val newsType:Int):ViewModel() {
                     else return@let NYTimesURL.MIDDLE_EAST_NEWS
                 }
                 val data = connect.getData(newsURL)
-                val channel = connect.parseXML(data)
+                val channel = kotlinXmlConnect.parseXML(data)
                 _newsList.postValue(channel)
                 _isLoading.postValue(false)
 
