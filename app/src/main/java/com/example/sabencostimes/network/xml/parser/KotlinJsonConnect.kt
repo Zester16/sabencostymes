@@ -2,12 +2,14 @@ package com.example.sabencostimes.network.xml.parser
 
 import android.util.Log
 import com.example.sabencostimes.domain.NYTMarketApiDomain
+import com.example.sabencostimes.domain.NYTNewsLetterDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.json.JSONArray
 import org.json.JSONObject
 
 class KotlinJsonConnect {
-    suspend fun parseJSon(jsonObject:String):List<NYTMarketApiDomain>{
+    suspend fun parseNYTimesStockJSon(jsonObject:String):List<NYTMarketApiDomain>{
         return withContext(Dispatchers.IO){
             try {
             val obj =  JSONObject(jsonObject)
@@ -33,5 +35,30 @@ class KotlinJsonConnect {
             }
 
         }
+    }
+    suspend fun getNYTimesNews(jsonString: String):MutableList<NYTNewsLetterDomain>{
+
+        return withContext(Dispatchers.IO){
+            try{
+
+                val jsonArray = JSONArray(jsonString)
+
+                Log.v("network-xml.parser-Kotlinconnect:getNYTNews",jsonArray.toString())
+
+                var i = 0
+                val nytNewsLetterDomainArray = mutableListOf<NYTNewsLetterDomain>()
+
+                while ( i < jsonArray.length() ){
+                    val dataObject =jsonArray.getJSONObject(i)
+                    nytNewsLetterDomainArray.add(NYTNewsLetterDomain(title = dataObject.getString("title"), date = dataObject.getString("date" ), imgSrc = dataObject.getString("img"), url = dataObject.getString("url")))
+               i++
+                }
+
+                return@withContext nytNewsLetterDomainArray
+        }
+            catch (exception:Exception){
+                Log.v("",exception.toString())
+                return@withContext mutableListOf<NYTNewsLetterDomain>()
+            }            }
     }
 }

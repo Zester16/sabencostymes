@@ -30,8 +30,6 @@ class NYTNewsRepository(private val connectData: Connect) {
 
         return withContext(Dispatchers.IO){
             val data =connectData.getData(url)
-
-
             return@withContext kotlinXmlConnect.parseXML(data)
         }
 

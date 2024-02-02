@@ -8,13 +8,14 @@ import com.example.sabencostimes.domain.NYTMarketApiDomain
 import com.example.sabencostimes.domain.NYTNewsDataDomain
 import com.example.sabencostimes.network.xml.parser.Connect
 import com.example.sabencostimes.network.xml.parser.KotlinJsonConnect
+import com.example.sabencostimes.repository.NYTNewsLetterRepository
 import com.example.sabencostimes.repository.NYTNewsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import java.lang.Exception
+import kotlin.Exception
 
 private lateinit var nytNewsRepository: NYTNewsRepository
 class DashboardViewModel():ViewModel() {
@@ -39,12 +40,14 @@ class DashboardViewModel():ViewModel() {
         nytNewsRepository = NYTNewsRepository(Connect())
          getNews()
         getDashData()
+
     }
 
     private  fun getNews(){
         viewmodelScope.launch {
             _mainNewsList.value = nytNewsRepository.getNYTFrontPageNews()
             Log.v("Dash", _mainNewsList.value.toString())
+            getNytNewsLetter()
         }
 
     }
@@ -53,7 +56,7 @@ class DashboardViewModel():ViewModel() {
             viewmodelScope.launch {
                 try {
                 val input =  connect.getData("https://www.nytimes.com/api/market")
-                _nytMarketApi.postValue(KotlinJsonConnect().parseJSon(input))
+                _nytMarketApi.postValue(KotlinJsonConnect().parseNYTimesStockJSon(input))
             }
                 catch (exception:Exception){
                     Log.v("Dashboard Exception", exception.toString())
@@ -63,5 +66,18 @@ class DashboardViewModel():ViewModel() {
                 }
         }
 
+    }
+    private suspend fun getNytNewsLetter(){
+        val connect = Connect()
+        viewmodelScope.launch{
+            try {
+               val nytNewsRepository= NYTNewsLetterRepository(connect)
+                val newsData = nytNewsRepository.getNYTNewsLetter()
+                Log.v("NYTNewsLetter",newsData[0].title+" Date:"+newsData[0].date)
+            }
+            catch(exception:Exception){
+Log.v("NYTNewsLetter Error",exception.toString())
+            }
+        }
     }
 }
