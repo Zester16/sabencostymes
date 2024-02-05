@@ -15,6 +15,9 @@ import com.example.sabencostimes.dashboard.DashboardLayout
 import com.example.sabencostimes.view.NewsIndividualView
 import com.example.sabencostimes.view.NewsListView
 import com.example.sabencostimes.appTab.NewsTabLayout
+import com.example.sabencostimes.network.xml.parser.Connect
+import com.example.sabencostimes.newsLetter.NewsletterDashboard
+import com.example.sabencostimes.repository.NYTNewsLetterRepository
 import com.example.sabencostimes.webview.NewsWebView
 import com.example.sabencostimes.settings.SettingsLayout
 import com.squareup.moshi.Moshi
@@ -59,6 +62,11 @@ fun NavGraph(navController:NavHostController) {
             if (urlLink != null) {
                 NewsWebView(navController = navController,newsUrl= urlLink)
             }
+
+        }
+        //dashboard for Newsletters
+        composable(NavigationConstant.NEWSLETTER){navBackStackEntry ->
+            NewsletterDashboard(respository = NYTNewsLetterRepository(Connect()))
         }
     }
     

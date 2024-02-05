@@ -32,16 +32,19 @@ fun DashboardLayout( navHostController: NavHostController,viewmodel: DashboardVi
     val newsList by viewmodel.newsList.observeAsState(initial = emptyList())
     Column(modifier=Modifier.padding(16.dp)){
 
-        Text(text = "STOCK MARKET", fontFamily = InterFont)
-        LazyRow(modifier = Modifier.fillMaxWidth(),
-            state = rememberLazyListState()){
-            items(items = stockMarketList) {it->
-                Log.v("percemt",it.percentageChange.toString())
-                val threeCardDomain = ThreeCardDomain(primaryData = convertDoubleToStringFormat(it.points), secondaryData = convertDoubleToStringFormat(it.percentageChange)+"%" , description = it.name)
-                StockCardView(threeCardDomain = threeCardDomain, primaryModifier=Modifier )
-            }
+        if(stockMarketList.isNotEmpty()){
+            Text(text = "STOCK MARKET", fontFamily = InterFont)
+            LazyRow(modifier = Modifier.fillMaxWidth(),
+                state = rememberLazyListState()){
+                items(items = stockMarketList) {it->
+                    Log.v("percemt",it.percentageChange.toString())
+                    val threeCardDomain = ThreeCardDomain(primaryData = convertDoubleToStringFormat(it.points), secondaryData = convertDoubleToStringFormat(it.percentageChange)+"%" , description = it.name)
+                    StockCardView(threeCardDomain = threeCardDomain, primaryModifier=Modifier )
+                }
 
+            }
         }
+
         if(newsList.isNotEmpty()){
             Text(text = "BREAKING NEWS", fontFamily = InterFont)
             NewsListColumn(navHost = navHostController, newsList = newsList)

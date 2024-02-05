@@ -76,7 +76,7 @@ class DashboardViewModel():ViewModel() {
                 Log.v("NYTNewsLetter",newsData[0].title+" Date:"+newsData[0].date)
             }
             catch(exception:Exception){
-Log.v("NYTNewsLetter Error",exception.toString())
+                Log.v("NYTNewsLetter Error",exception.toString())
             }
         }
     }
