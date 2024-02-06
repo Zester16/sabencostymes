@@ -66,7 +66,7 @@ fun NavGraph(navController:NavHostController) {
         }
         //dashboard for Newsletters
         composable(NavigationConstant.NEWSLETTER){navBackStackEntry ->
-            NewsletterDashboard(respository = NYTNewsLetterRepository(Connect()))
+            NewsletterDashboard(navController,respository = NYTNewsLetterRepository(Connect()))
         }
     }
     

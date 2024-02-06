@@ -22,6 +22,8 @@ import com.example.sabencostimes.domain.NYTNewsDataDomain
 import com.example.sabencostimes.domain.toParceable
 import com.example.sabencostimes.navigation.NavigationConstant
 import com.example.sabencostimes.parceable.NYTNewsParceable
+import com.example.sabencostimes.utils.invokeNavigationToExternalWebBrowser
+import com.example.sabencostimes.utils.invokeNavigationToInternalWebBrowser
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
@@ -71,19 +73,15 @@ fun  NewsCardView(navHostController: NavHostController,nytNews:NYTNewsDataDomain
                     Image(painter = readIcon, contentDescription = "")
                 }
                 Button(onClick = {
+                    invokeNavigationToInternalWebBrowser(nytNews.url.toString(),navHostController)
 
-                    navHostController.navigate(NavigationConstant.WEB_VIEW_PATH.replace("{webUrl}",nytNews.url.toString())){
-                        //launchSingleTop = true
-                        //restoreState = true
-                    }
                 },
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
                 ){
                     Image(painter = (webIcon), contentDescription = "browser",Modifier.background(color = Color.White))
                 }
                 Button(onClick ={
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(nytNews.url))
-                    startActivity(context, intent, null)
+                    invokeNavigationToExternalWebBrowser(nytNews.url.toString(), context = context)
                 } ,
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
                 ){
