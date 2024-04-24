@@ -8,12 +8,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.sabencostimes.domain.NYT_MORNING_EUROPE
 import com.example.sabencostimes.repository.NYTNewsLetterRepository
 import com.example.sabencostimes.view.recyclableComponents.NewsLetterCardView
 
 @Composable
 fun NewsletterDashboard( navHostController: NavHostController,respository:NYTNewsLetterRepository,  newsletterDashboardViewModel: NewsletterDashboardViewModel= viewModel(
-   factory = NewsLetterViewModelFactory(repository = respository)
+   factory = NewsLetterViewModelFactory(repository = respository, NYT_MORNING_EUROPE)
 )){
 
    val newsLetterList by newsletterDashboardViewModel.newsLetterList.observeAsState(emptyList())

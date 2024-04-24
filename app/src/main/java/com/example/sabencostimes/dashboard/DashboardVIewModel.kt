@@ -47,7 +47,6 @@ class DashboardViewModel():ViewModel() {
         viewmodelScope.launch {
             _mainNewsList.value = nytNewsRepository.getNYTFrontPageNews()
             Log.v("Dash", _mainNewsList.value.toString())
-            getNytNewsLetter()
         }
 
     }
@@ -67,17 +66,5 @@ class DashboardViewModel():ViewModel() {
         }
 
     }
-    private suspend fun getNytNewsLetter(){
-        val connect = Connect()
-        viewmodelScope.launch{
-            try {
-               val nytNewsRepository= NYTNewsLetterRepository(connect)
-                val newsData = nytNewsRepository.getNYTNewsLetter()
-                Log.v("NYTNewsLetter",newsData[0].title+" Date:"+newsData[0].date)
-            }
-            catch(exception:Exception){
-                Log.v("NYTNewsLetter Error",exception.toString())
-            }
-        }
-    }
+
 }

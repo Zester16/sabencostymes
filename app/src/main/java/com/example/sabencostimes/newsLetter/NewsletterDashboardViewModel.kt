@@ -12,7 +12,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-class NewsletterDashboardViewModel(private val repository: NYTNewsLetterRepository):ViewModel() {
+class NewsletterDashboardViewModel(private val repository: NYTNewsLetterRepository,private val newsKey:String):ViewModel() {
 
     private val job = Job()
     private val viewModelJob = CoroutineScope(Dispatchers.Main+job)
@@ -30,13 +30,13 @@ class NewsletterDashboardViewModel(private val repository: NYTNewsLetterReposito
 
     fun getNewsLetter(){
         viewModelJob.launch {
-           _newsLetterList.value= repository.getNYTNewsLetter()
+           _newsLetterList.value= repository.getNYTNewsLetter(newsKey =newsKey )
         }
     }
 }
 
-class NewsLetterViewModelFactory(private val repository: NYTNewsLetterRepository):ViewModelProvider.Factory{
-    override fun <T : ViewModel> create(modelClass: Class<T>): T = NewsletterDashboardViewModel(repository) as T
+class NewsLetterViewModelFactory(private val repository: NYTNewsLetterRepository, private val newsKey: String):ViewModelProvider.Factory{
+    override fun <T : ViewModel> create(modelClass: Class<T>): T = NewsletterDashboardViewModel(repository,newsKey) as T
 
 
 }
