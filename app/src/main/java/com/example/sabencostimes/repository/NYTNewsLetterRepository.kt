@@ -17,7 +17,7 @@ class NYTNewsLetterRepository(private val connectData: Connect) {
             if(!checkKey){
                 throw Exception("nyt-news-parser: No nytKey found")
             }
-            val SUFFIX_URL=NYTNewsletterURLMap.get(newsKey)
+            val SUFFIX_URL= NYTNewsletterURLMap.get(newsKey)?.url
             val PRIMARY_STRING= BuildConfig.TIVV_URL.toString()
             //"/live/nyt-dealbook-array"
             val REQ_STRING = PRIMARY_STRING+SUFFIX_URL

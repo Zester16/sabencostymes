@@ -1,6 +1,8 @@
 package com.example.sabencostimes.navigation
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 
 import androidx.compose.runtime.Composable
 
@@ -16,13 +18,15 @@ import com.example.sabencostimes.view.NewsIndividualView
 import com.example.sabencostimes.view.NewsListView
 import com.example.sabencostimes.appTab.NewsTabLayout
 import com.example.sabencostimes.network.xml.parser.Connect
-import com.example.sabencostimes.newsLetter.NewsletterDashboard
+import com.example.sabencostimes.newsLetter.NewsLetterDashboardView
+import com.example.sabencostimes.newsLetter.NewsletterView
 import com.example.sabencostimes.repository.NYTNewsLetterRepository
 import com.example.sabencostimes.webview.NewsWebView
 import com.example.sabencostimes.settings.SettingsLayout
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun NavGraph(navController:NavHostController) {
@@ -65,8 +69,16 @@ fun NavGraph(navController:NavHostController) {
 
         }
         //dashboard for Newsletters
-        composable(NavigationConstant.NEWSLETTER){navBackStackEntry ->
-            NewsletterDashboard(navController,respository = NYTNewsLetterRepository(Connect()))
+        composable(NavigationConstant.NEWSLETTER_DASH){
+            backStackEntry-> NewsLetterDashboardView(navHostController = navController)
+
+        }
+        //individual newsletter array
+        composable(NavigationConstant.NEWSLETTER_LIST){navBackStackEntry ->
+            val newsId = navBackStackEntry.arguments?.getString("news_id")
+            if (newsId != null) {
+                NewsletterView(navController,respository = NYTNewsLetterRepository(Connect()),newsId)
+            }
         }
     }
     
