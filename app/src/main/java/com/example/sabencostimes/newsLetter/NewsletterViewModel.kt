@@ -1,5 +1,6 @@
 package com.example.sabencostimes.newsLetter
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +13,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-class NewsletterDashboardViewModel(private val repository: NYTNewsLetterRepository,private val newsKey:String):ViewModel() {
+class NewsletterViewModel(private val repository: NYTNewsLetterRepository,private val newsKey:String):ViewModel() {
 
     private val job = Job()
     private val viewModelJob = CoroutineScope(Dispatchers.Main+job)
@@ -30,13 +31,19 @@ class NewsletterDashboardViewModel(private val repository: NYTNewsLetterReposito
 
     fun getNewsLetter(){
         viewModelJob.launch {
-           _newsLetterList.value= repository.getNYTNewsLetter(newsKey =newsKey )
-        }
+            try {
+                _newsLetterList.value= repository.getNYTNewsLetter(newsKey =newsKey )
+
+            }
+            catch(e:Exception){
+                Log.v("newslettervm $newsKey",e.toString())
+            }
+                  }
     }
 }
 
 class NewsLetterViewModelFactory(private val repository: NYTNewsLetterRepository, private val newsKey: String):ViewModelProvider.Factory{
-    override fun <T : ViewModel> create(modelClass: Class<T>): T = NewsletterDashboardViewModel(repository,newsKey) as T
+    override fun <T : ViewModel> create(modelClass: Class<T>): T = NewsletterViewModel(repository,newsKey) as T
 
 
 }
