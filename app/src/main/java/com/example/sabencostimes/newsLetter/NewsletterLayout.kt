@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.Card
@@ -20,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.sabencostimes.domain.NYTNewsletterURLMap
@@ -47,14 +50,30 @@ fun NewsletterView( navHostController: NavHostController,respository:NYTNewsLett
 @Composable
 fun NewsLetterDashboardView(navHostController: NavHostController){
    Column(modifier = Modifier.fillMaxSize(),
-           verticalArrangement = Arrangement.Center,
+           verticalArrangement = Arrangement.Top,
       horizontalAlignment = Alignment.CenterHorizontally
    )         {
       Text(text = "NYT Newsletter")
-      NYTNewsletterURLMap.forEach { entry ->
-            Card(onClick = {  navHostController.navigate(NavigationConstant.NEWSLETTER_LIST.replace("{news_id}",entry.key))}, modifier = Modifier.fillMaxWidth()) {
-               Image(painter = painterResource(entry.value.image), contentDescription ="News" )
+      val nytValueList = NYTNewsletterURLMap.values.toMutableList()
+      val nytKeyList = NYTNewsletterURLMap.keys.toMutableList()
+      LazyVerticalGrid( columns = GridCells.Fixed(2),
+         verticalArrangement = Arrangement.spacedBy(16.dp),
+         horizontalArrangement = Arrangement.spacedBy(16.dp))
+
+         {
+            items(nytValueList.size) { entry->
+                           Card(onClick = {  navHostController.navigate(NavigationConstant.NEWSLETTER_LIST.replace("{news_id}",nytKeyList[entry]))}, modifier = Modifier.fillMaxWidth()) {
+               Image(painter = painterResource(nytValueList[entry].image), contentDescription ="News" )
             }
-      }
+
+            }
+//         NYTNewsletterURLMap.forEach { entry ->
+//            Card(onClick = {  navHostController.navigate(NavigationConstant.NEWSLETTER_LIST.replace("{news_id}",entry.key))}, modifier = Modifier.fillMaxWidth()) {
+//               Image(painter = painterResource(entry.value.image), contentDescription ="News" )
+//            }
+//         }
+            //}
+
+         }
    }
 }
