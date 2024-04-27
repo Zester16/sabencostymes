@@ -2,14 +2,22 @@ package com.example.sabencostimes.newsLetter
 
 import android.icu.text.CaseMap.Title
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
+import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,18 +43,18 @@ fun NewsletterView( navHostController: NavHostController,respository:NYTNewsLett
    }
 
 }
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun NewsLetterDashboardView(navHostController: NavHostController){
-   Column {
+   Column(modifier = Modifier.fillMaxSize(),
+           verticalArrangement = Arrangement.Center,
+      horizontalAlignment = Alignment.CenterHorizontally
+   )         {
       Text(text = "NYT Newsletter")
       NYTNewsletterURLMap.forEach { entry ->
-         Button(onClick = {
-            navHostController.navigate(NavigationConstant.NEWSLETTER_LIST.replace("{news_id}",entry.key))
-         }) {
-            Image(painter = painterResource(entry.value.image), contentDescription ="News" )
-         }
+            Card(onClick = {  navHostController.navigate(NavigationConstant.NEWSLETTER_LIST.replace("{news_id}",entry.key))}, modifier = Modifier.fillMaxWidth()) {
+               Image(painter = painterResource(entry.value.image), contentDescription ="News" )
+            }
       }
    }
-
-
 }
